@@ -1,17 +1,17 @@
 const express = require("express");
 const passport = require("passport");
-const passportJwt = require("passport jwt");
+const passportJwt = require("passport-jwt");
 const jwt = require("jsonwebtoken");
 
 
-const secret = "this is a sccret key hehe :D"
+const secret = "this is a secret key hehe :D"
 configurePassport();
 
 const app = express();
 
 app.use(passport.initialize());
 
-app.get("login", (req, res) => {
+app.get("/login", (req, res) => {
     const username = request.query.username;
     const password = request.query.password;
     if (username === true && password === true){
@@ -32,6 +32,9 @@ app.get("/books",passport.authenticate("jwt", { session: false }), (req, res) =>
     return [];
 });
 
+app.use(express.static("frontend"));
+
+
 app.listen(3000, () => {
     console.log("Bookish is on port 3000");
 
@@ -39,7 +42,7 @@ app.listen(3000, () => {
 
 function configurePassport(){
     const jwtOptions = {
-        jwtFromRequest: passport.Jwt.ExtractJwt.fromHeader("x-access-token"),
+        jwtFromRequest: passportJwt.ExtractJwt.fromHeader("x-access-token"),
         secretOrKey: secret,
     }
 
