@@ -19,9 +19,9 @@ CREATE TABLE Book(
 	REFERENCES Author(id)
 );
 
-CREATE TABLE Checkouts(
+CREATE TABLE Checkout(
    	dueBack SERIAL,
-    bookId VARCHAR(10) NOT NULL,
+   	bookId VARCHAR(10) NOT NULL,
 	accountId INT,
 	FOREIGN KEY (accountId)
 	REFERENCES Account(id)
