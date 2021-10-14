@@ -4,8 +4,9 @@ const passportJwt = require("passport-jwt");
 const jwt = require("jsonwebtoken");
 const app = express();
 const pgp = require('pg-promise')();
+const password = require('./config');
 
-const db = pgp('postgres://postgres:@localhost:5432/postgres');
+const db = pgp(`postgres://postgres:${password}@localhost:5432/Bookish`);
 
 class Bookdata{
     constructor(id, name, isbn, barCode, authorId){
@@ -17,9 +18,8 @@ class Bookdata{
     }
 }
 
-
 app.get("/books", (req, res)=>{
-    db.any("SELECT * FROM BOOKS")
+    db.any("SELECT * FROM BOOK")
     .then((data) => {
         const books = [];
         for(let i = 0; i < data.length ; i++){
@@ -38,3 +38,7 @@ app.get("/books", (req, res)=>{
     });
 });
 
+app.listen(3000, () => {
+    console.log("Bookish is on port 3000 :)");
+
+});
