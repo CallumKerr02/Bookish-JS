@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const app = express();
 const pgp = require('pg-promise')();
 
-const db = pgp('postgres://postgres:Goggletob246!@localhost:5432/postgres');
+const db = pgp('postgres://postgres:@localhost:5432/postgres');
 
 class Bookdata{
     constructor(id, name, isbn, barCode, authorId){
